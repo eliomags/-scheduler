@@ -18,7 +18,7 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 // import Form from "components/Appointment/Form";
-
+import Form from "components/Form";
 
 storiesOf("Button", module)
   .addParameters({
@@ -170,13 +170,20 @@ storiesOf("Button", module)
         .add("Error", () => (
           <Error message="Could not delete appointment." onClose={action("onClose")} />
         ))
-        // .add("Edit", () => ( // Edit is a new story that we are adding to our Appointment stories
-        //   <Form // We are using the Form component to render the Edit story
-        //     name="Lydia Miller-Jones"
-        //     interviewers={interviewers}
-        //     interviewer={3}
-        //     onSave={action("onSave")}
-        //     onCancel={action("onCancel")}
-        //   />  
-        // ))
+        .add("Edit", () => ( // Edit is a new story that we are adding to our Appointment stories
+          <Form // We are using the Form component to render the Edit story
+            name="Elshan Magsudov"
+            interviewers={interviewers}
+            interviewer={3}
+            onSave={action("onSave")}
+            onCancel={action("onCancel")}
+          />  
+        ))
+        .add("Create", () => ( // Create is a new story that we are adding to our Appointment stories
+          <Form // We are using the Form component to render the Create story
+            interviewers={interviewers}
+            onSave={action("onSave")}
+            onCancel={action("onCancel")}
+          />  
+        ))
         
