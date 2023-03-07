@@ -4,8 +4,8 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
-import useVisualMode from "hooks/useVisualMode";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+// import useVisualMode from "hooks/useVisualMode";
 // import InterviewerListItem from "./InterviewerListItem";
 
 
@@ -34,6 +34,7 @@ export default function Application(props) {
 }, []);
 
 const appointments = getAppointmentsForDay(state, state.day);  
+const interviewers = getInterviewersForDay(state, state.day);
 
   return (
     <main className="layout">
@@ -64,6 +65,7 @@ const appointments = getAppointmentsForDay(state, state.day);
             <Appointment
               key={appointment.id}
               {...appointment}
+              interviewers={interviewers}
             />
           );
         })}
