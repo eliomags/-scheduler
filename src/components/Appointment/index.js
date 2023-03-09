@@ -6,8 +6,8 @@ import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Form";
 import Status from "components/Appointment/Status";
-// import Confirm from "components/Appointment/Confirm";
-// import Error from "components/Appointment/Error";
+import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 import useVisualMode from "hooks/useVisualMode";
 
 
@@ -17,11 +17,11 @@ export default function Appointment(props) {
     const SHOW = "SHOW";
     const CREATE = "CREATE";
     const SAVING = "SAVING";
-    //     const DELETING = "DELETING";
-    //     const CONFIRM = "CONFIRM";
-    //     const EDIT = "EDIT";
-    //     const ERROR_SAVE = "ERROR_SAVE";
-    //     const ERROR_DELETE = "ERROR_DELETE";
+    const DELETING = "DELETING";
+    const CONFIRM = "CONFIRM";
+    const EDIT = "EDIT";
+    const ERROR_SAVE = "ERROR_SAVE";
+    const ERROR_DELETE = "ERROR_DELETE";
 
 
     const { mode, transition, back } = useVisualMode(
@@ -35,24 +35,21 @@ export default function Appointment(props) {
         };
         transition(SAVING);
         props.bookInterview(props.id, interview)
-        transition(SHOW);
+        .then (() => transition(SHOW));
         // .catch(error => transition(ERROR_SAVE, true));
-        // Call props.bookInterview with the appointment id and interview object
   
 
-  // Verify that the id and interview values are correct in the console output
-  console.log("Appointment id:", props.id);
-  console.log("Interview:", interview);
+//   // Verify that the id and interview values are correct in the console output
+//   console.log("Appointment id:", props.id);
+//   console.log("Interview:", interview);
     
     };
 
-//     function destroy() {
-//         transition(DELETING, true);
-//         props
-//             .cancelInterview(props.id)
-//             .then(() => transition(EMPTY))
-//             .catch(error => transition(ERROR_DELETE, true));
-    // }
+    function destroy() {
+        transition(DELETING, true);
+        props.cancelInterview(props.id)
+        .then (() => transition(EMPTY));
+    }
 
     return (
         <article className="appointment">
@@ -62,7 +59,8 @@ export default function Appointment(props) {
             {mode === SHOW && (
                 <Show
                     student={props.interview.student}
-                    interviewer={props.interviewers.find(item => item.id === props.interview.interviewer)}
+                    interviewer={props.interview.interviewer}
+                    onDelete={() => destroy()}
                 />
             )}
             {mode === CREATE && (
@@ -77,12 +75,13 @@ export default function Appointment(props) {
             {mode === SAVING && 
             <Status message="Saving" />
             }
+            {mode === DELETING && <Status message="Deleting" />}
+
 
         </article>
     );
 }
 
-//             {mode === DELETING && <Status message="Deleting" />}
 //             {mode === CONFIRM && (
 //                 <Confirm
 //                     message="Are you sure you would like to delete?"

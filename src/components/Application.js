@@ -33,7 +33,7 @@ export default function Application(props) {
       ...state,
       appointments
     });
-      axios.put(`/api/appointments/${id}`, { interview })
+     return axios.put(`/api/appointments/${id}`, { interview })
         .then(() => {
           setState({
             ...state,
@@ -41,6 +41,20 @@ export default function Application(props) {
           });
         });
 };
+
+const cancelInterview = (id) => {
+  const appointment = { ...state.appointments[id], interview: null };
+  const appointments = { ...state.appointments, [id]: appointment };
+  setState({ ...state, appointments });
+  return axios.delete(`/api/appointments/${id}`)
+    .then(() => {
+      setState({
+        ...state,
+        appointments
+      });
+    });
+};
+
 
   useEffect(() => {
   // axios.get("/api/days").then(response => 
@@ -90,7 +104,8 @@ console.log("interviewers", interviewers );
               {...appointment}
               interviewers={interviewers}
               bookInterview={bookInterview}
-            
+              interview={interview}
+              cancelInterview={cancelInterview}
             />
           );
         })}
