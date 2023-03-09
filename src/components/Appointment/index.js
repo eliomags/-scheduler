@@ -5,7 +5,7 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Form";
-// import Status from "components/Appointment/Status";
+import Status from "components/Appointment/Status";
 // import Confirm from "components/Appointment/Confirm";
 // import Error from "components/Appointment/Error";
 import useVisualMode from "hooks/useVisualMode";
@@ -16,7 +16,7 @@ export default function Appointment(props) {
     const EMPTY = "EMPTY";
     const SHOW = "SHOW";
     const CREATE = "CREATE";
-    //     const SAVING = "SAVING";
+    const SAVING = "SAVING";
     //     const DELETING = "DELETING";
     //     const CONFIRM = "CONFIRM";
     //     const EDIT = "EDIT";
@@ -33,14 +33,12 @@ export default function Appointment(props) {
             student: name,
             interviewer
         };
-//         transition(SAVING);
-        // props
-        // .bookInterview(props.id, interview);
-        // .then(() => transition(SHOW))
+        transition(SAVING);
+        props.bookInterview(props.id, interview)
+        transition(SHOW);
         // .catch(error => transition(ERROR_SAVE, true));
         // Call props.bookInterview with the appointment id and interview object
-  props.bookInterview(props.id, interview);
-  transition(SHOW);
+  
 
   // Verify that the id and interview values are correct in the console output
   console.log("Appointment id:", props.id);
@@ -76,12 +74,14 @@ export default function Appointment(props) {
                     id={props.id}
                 />  
             )}
+            {mode === SAVING && 
+            <Status message="Saving" />
+            }
 
         </article>
     );
 }
 
-//             {mode === SAVING && <Status message="Saving" />}
 //             {mode === DELETING && <Status message="Deleting" />}
 //             {mode === CONFIRM && (
 //                 <Confirm
