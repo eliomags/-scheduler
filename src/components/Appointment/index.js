@@ -28,17 +28,25 @@ export default function Appointment(props) {
         props.interview ? SHOW : EMPTY
     );
 
-//     function save(name, interviewer) {
-//         const interview = {
-//             student: name,
-//             interviewer
-//         };
+    function save(name, interviewer) {
+        const interview = {
+            student: name,
+            interviewer
+        };
 //         transition(SAVING);
-//         props
-//             .bookInterview(props.id, interview)
-//             .then(() => transition(SHOW))
-//             .catch(error => transition(ERROR_SAVE, true));
-//     }
+        // props
+        // .bookInterview(props.id, interview);
+        // .then(() => transition(SHOW))
+        // .catch(error => transition(ERROR_SAVE, true));
+        // Call props.bookInterview with the appointment id and interview object
+  props.bookInterview(props.id, interview);
+  transition(SHOW);
+
+  // Verify that the id and interview values are correct in the console output
+  console.log("Appointment id:", props.id);
+  console.log("Interview:", interview);
+    
+    };
 
 //     function destroy() {
 //         transition(DELETING, true);
@@ -46,26 +54,29 @@ export default function Appointment(props) {
 //             .cancelInterview(props.id)
 //             .then(() => transition(EMPTY))
 //             .catch(error => transition(ERROR_DELETE, true));
-//     }
+    // }
 
     return (
         <article className="appointment">
+            {console.log("props", props)}
             <Header time={props.time} />
             {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
             {mode === SHOW && (
                 <Show
                     student={props.interview.student}
-                    interviewer={props.interview.interviewer}
+                    interviewer={props.interviewers.find(item => item.id === props.interview.interviewer)}
                 />
             )}
             {mode === CREATE && (
                 <Form
                     interviewers={props.interviewers}
                     onCancel={() => back()}
-                    // onSave={save}
+                    onSave={save}
+                    bookInterview={props.bookInterview}
+                    id={props.id}
                 />  
             )}
-            
+
         </article>
     );
 }
