@@ -46,6 +46,9 @@ export default function Appointment(props) {
     };
 
     function destroy() {
+        transition(CONFIRM);
+    }
+    function destroyConfirm() {
         transition(DELETING, true);
         props.cancelInterview(props.id)
         .then (() => transition(EMPTY));
@@ -76,19 +79,20 @@ export default function Appointment(props) {
             <Status message="Saving" />
             }
             {mode === DELETING && <Status message="Deleting" />}
+            {mode === CONFIRM && (
+                <Confirm
+                    message="Are you sure you would like to delete?"
+                    onCancel={() => back()}
+                    onConfirm={destroyConfirm}
+                />
+            )}
 
 
         </article>
     );
 }
 
-//             {mode === CONFIRM && (
-//                 <Confirm
-//                     message="Are you sure you would like to delete?"
-//                     onCancel={() => back()}
-//                     onConfirm={destroy}
-//                 />
-//             )}
+
 //             {mode === EDIT && (
 //                 <Form
 //                     name={props.interview.student}
