@@ -34,9 +34,11 @@ export default function Appointment(props) {
             interviewer
         };
         transition(SAVING);
-        props.bookInterview(props.id, interview)
-        .then (() => transition(SHOW));
-        // .catch(error => transition(ERROR_SAVE, true));
+        
+        props
+        .bookInterview(props.id, interview)
+        .then (() => transition(SHOW))
+        .catch(error => transition(ERROR_SAVE, true));
   
 
 //   // Verify that the id and interview values are correct in the console output
@@ -51,7 +53,8 @@ export default function Appointment(props) {
     function destroyConfirm() {
         transition(DELETING, true);
         props.cancelInterview(props.id)
-        .then (() => transition(EMPTY));
+        .then (() => transition(EMPTY))
+        .catch(error => transition(ERROR_DELETE, true));
     }
     function edit() {
         transition(EDIT);
@@ -59,10 +62,9 @@ export default function Appointment(props) {
 
     return (
         <article className="appointment">
-            {console.log("props", props)}
             <Header time={props.time} />
             {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-            {mode === SHOW && (
+            {mode === SHOW && props.interview && props.interview.student && (
                 <Show
                     student={props.interview.student}
                     interviewer={props.interview.interviewer}
@@ -92,6 +94,7 @@ export default function Appointment(props) {
             )}
             {mode === EDIT && (
                 <Form
+                    name={props.interview.student.name}
                     student={props.interview.student}
                     interviewer={props.interview.interviewer.id}
                     interviewers={props.interviewers}
@@ -99,14 +102,7 @@ export default function Appointment(props) {
                     onSave={save}
                 />
             )}
-
-        </article>
-    );
-};
-
-
-
-{/* {mode === ERROR_SAVE && (
+            {mode === ERROR_SAVE && (
                 <Error
                     message="Could not save appointment."
                     onClose={() => back()}
@@ -118,6 +114,7 @@ export default function Appointment(props) {
                     onClose={() => back()}  
                 />
             )}
+
         </article>
-    );  
-} */}
+    );
+};
