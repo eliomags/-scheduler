@@ -2,7 +2,6 @@ import React from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 import { useState } from "react";
-import InterviewerListItem from "./InterviewerListItem";
 
 export default function Form(props) {
     // const { name, interviewers, interviewer, onSave, onCancel } = props;

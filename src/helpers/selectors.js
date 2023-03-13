@@ -9,6 +9,21 @@ export function getAppointmentsForDay(state, day) {
     }
     return result;
 }
+export function calculateSpotsForDay(state, day, appointments) {
+    const dayObj = state.days.find((dayObj) => dayObj.name === day);
+    console.log("dayObj", dayObj);
+    if (!dayObj) {
+      return null;
+    }
+    const appointmentsForDay = dayObj.appointments.map(id => appointments[id]);
+    console.log("appointmentsForDay", appointmentsForDay);
+    const nullInterviewes = appointmentsForDay.filter(appt => appt.interview === null);
+    console.log("nullInterviewes", nullInterviewes);
+    const spots = nullInterviewes.length;
+    console.log("spots", spots);
+    return spots;
+  }
+  
   
 export function getInterview(state, interview) {
     //... returns an object that contains the interview data when we pass it an object that contains the interviewer
