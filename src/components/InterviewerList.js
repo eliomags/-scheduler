@@ -28,13 +28,14 @@ export default function InterviewerList(props) {
 }
 
 InterviewerList.propTypes = {
-    interviewers: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            avatar: PropTypes.string.isRequired,
-        })
-    ).isRequired,
+    // interviewers: PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //         id: PropTypes.number.isRequired,
+    //         name: PropTypes.string.isRequired,
+    //         avatar: PropTypes.string.isRequired,
+    //     })
+    // ).isRequired,
+    interviewers: PropTypes.array,
     value: PropTypes.number,
     onChange: PropTypes.func.isRequired,
 }
