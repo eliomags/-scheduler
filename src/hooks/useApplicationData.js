@@ -69,12 +69,12 @@ export default function useApplicationData() {
     }, []);
   
     function bookInterview(id, interview) {
-      return axios
-        .put(`/api/appointments/${id}`, { interview })
-        .then(() => {
+        return axios
+          .put(`/api/appointments/${id}`, { interview })
+          .then(() => {
             dispatch({ type: SET_INTERVIEW, id, interview });
-        });
-    }
+          })
+      }
   
     function cancelInterview(id) {
       return axios
