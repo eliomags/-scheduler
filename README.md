@@ -1,62 +1,87 @@
 # Interview Scheduler
 
-## Introduction
+Interview Scheduler is a single-page web application built using React that allows users to book, edit, and cancel interviews with selected interviewers.
 
-Scheduler is a web application built with React that allows users to book and manage appointments with interviewers. The app has a clean and intuitive design that makes it easy for users to schedule appointments.
+## Features
 
-Features
+* Users can book interviews for any available time slot on any selected day of the week.
+* Users can edit the student name and interviewer for an existing appointment.
+* Users can cancel an existing appointment.
+* Multiple users can use the application simultaneously without interfering with each other's data.
+* Error handling is in place for any unexpected scenarios.
 
-* Book appointments with interviewers.
-* Edit existing appointments.
-* Cancel appointments.
+## Tech Stack
 
-* Display the days of the week with their corresponding appointments.
-* Display the number of appointments available for each day.
-* Highlight days with no remaining appointments.
-* Display the time for each appointment slot.
-
-
-Install dependencies using npm install.
-Create a new database called scheduler_test using the same process as the The API Server activity.
-Run the API server with npm start and reset the test database by making a GET request to http://localhost:8001/api/debug/reset.
-Run the scheduler app with npm start.
-Run Cypress with npm run cypress.
+React
+Axios
+WebSockets
+Storybook
+Jest
+Cypress
 
 ## Setup
 
-Getting Started
+* Fork and clone the repository.
+* Install dependencies using the npm install command.
+* Start the development web server using the `npm start` command. The app will be served at http://localhost:8000.
+* Start the WebSocket server in a new terminal window using the `npm run start:server` command.
+* Visit http://localhost:8000 in your browser to start using the application.
 
-Fork and clone this repository.
+## Screenshots
 
-Navigate to the project directory in your terminal.
-Run `npm install` to install the project's dependencies.
+https://github.com/eliomags/-scheduler/blob/master/Screenshot%202023-03-22%20at%2010.43.48%20PM.png
 
-## Running Webpack Development Server
 
-Run `npm start` to start the development server. This will open the app in your default browser at http://localhost:8000.
 
-```sh
-npm start
-```
+Screenshot of the Interview Scheduler home page
+https://github.com/eliomags/-scheduler/blob/master/docs/Screenshot%202023-03-22%20at%2010.43.48%20PM.png?raw=true
 
-## Running Jest Test Framework
+Screenshot of booking an interview
+https://github.com/eliomags/-scheduler/blob/master/docs/Screenshot%202023-03-22%20at%2010.44.24%20PM.png?raw=true
 
-The app has been thoroughly tested using unit and end-to-end testing. To run the tests, use the following command:
+https://github.com/eliomags/-scheduler/blob/master/docs/Screenshot%202023-03-22%20at%2010.44.54%20PM.png?raw=true
 
-```sh
-npm test
-```
+Screenshot of deleting an interview
+https://github.com/eliomags/-scheduler/blob/master/docs/Screenshot%202023-03-22%20at%2010.45.24%20PM.png?raw=true
 
-## Running Storybook Visual Testbed
+## Storybook
 
-```sh
-npm run storybook
-```
+This project includes a Storybook implementation that can be used to view individual React components in isolation.
 
-## Author
+To launch Storybook, run the `npm run storybook` command and visit http://localhost:9009 in your browser.
 
-Elshan Magsudov
+## Running Tests
 
-## Acknowledgements
+This project includes both unit and end-to-end tests using Jest and Cypress.
 
-This project was created as part of the Lighthouse Labs Web Development Bootcamp. Special thanks to the instructors, TAs, and mentors who helped along the way.
+To run the unit tests, use the `npm test` command.
+
+To run the end-to-end tests, ensure that the development and WebSocket servers are both running, then use the `npm run cypress` command and select the desired test to run in the Cypress Test Runner.
+
+## Dependencies
+
+* Axios
+* Classnames
+* Normalize.css
+* React
+* React-dom
+* React-scripts
+
+## Dev Dependencies
+
+* @babel/core
+* @storybook/addon-actions
+* @storybook/addon-backgrounds
+* @storybook/addon-links
+* @storybook/addons
+* @storybook/react
+* @testing-library/jest-dom
+* @testing-library/react
+* @testing-library/react-hooks
+* Babel-loader
+* Cypress
+* Prop-types
+* React-test-renderer
+
+## Aknowledgment 
+This project was created as part of the Lighthouse Labs Web Development Bootcamp.
